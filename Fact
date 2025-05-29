@@ -1,0 +1,25 @@
+CREATE OR REPLACE PROCEDURE calculate_factorial (
+    n IN NUMBER,
+    factorial_result OUT NUMBER
+)
+IS
+BEGIN
+    factorial_result := 1;
+    IF n = 0 THEN
+        factorial_result := 1;
+    ELSE
+        FOR i IN 1..n LOOP
+            factorial_result := factorial_result * i;
+        END LOOP;
+    END IF;
+END;
+/
+-- Example of how to execute the procedure
+DECLARE
+    num NUMBER := 5;
+    fact NUMBER;
+BEGIN
+    calculate_factorial(num, fact);
+    DBMS_OUTPUT.PUT_LINE('Factorial of ' || num || ' is: ' || fact);
+END;
+/
