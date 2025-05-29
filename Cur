@@ -1,0 +1,17 @@
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT employee_id, first_name, last_name
+    FROM employees
+    WHERE department_id = 99; -- Example condition that might not return any rows
+  emp_record emp_cursor%ROWTYPE;
+BEGIN
+  OPEN emp_cursor;
+  FETCH emp_cursor INTO emp_record;
+  IF emp_cursor%NOTFOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No employees found in the specified department.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Employee found: ' || emp_record.first_name || ' ' || emp_record.last_name);
+  END IF;
+  CLOSE emp_cursor;
+END;
+/
